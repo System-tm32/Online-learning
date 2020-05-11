@@ -1,0 +1,14 @@
+.block_login {
+	justify-content: center;
+	padding: 100px 0;
+	flex-grow: 1;
+}
+.authForm {
+	padding: 20px;
+	width: 300px;
+	margin: 0 auto;
+}
+.btn {
+	display: block;
+	margin-bottom: 10px;
+}

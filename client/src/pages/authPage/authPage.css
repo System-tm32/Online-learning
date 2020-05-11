@@ -1,0 +1,38 @@
+.wt_block {
+	background: url(wt-bg2.png) no-repeat right, linear-gradient(90deg, rgba(255,242,203,1) 0%, rgba(255,254,233,1) 43%, rgba(255,255,255,1) 78%);
+	height: 91vh;
+	padding-top: 200px;
+}
+.title {
+	font-size: 64px;
+	font-weight: bold;
+	line-height: 0.8;
+	margin-bottom: 15px;
+	font-family: Arial;
+	color: rgba(0, 0, 0, .8);
+}
+
+.description {
+	color: rgba(0, 0, 0, .8);
+}
+.card-action {
+	color: #fff;
+}
+.card .card-content .card-title {
+	font-weight: bold;
+}
+.wt_label {
+	text-align: center;
+}
+.wt_section {
+	background: linear-gradient(90deg, rgba(255,242,203,1) 0%, rgba(255,254,233,1) 43%, rgba(255,255,255,1) 78%);
+}
+.row {
+	margin-bottom: 0px;
+}
+.block {
+	padding: 50px 0;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+	font-weight: bold;
+}
