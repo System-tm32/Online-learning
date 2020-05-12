@@ -3,6 +3,13 @@ import './loginPage.css'
 
 const Login = () => {
 	const [isRegistration, setIsRegistration] = useState(false);
+	const [form, setForm] = useState({
+		email: '', password: '', name: ''
+	});
+
+	const changeHandler = event => {
+		setForm({...form, [event.target.name]: event.target.value})
+	}
 
 	const statusFormHandler = (isStatus) => {
 		setIsRegistration(!isStatus);
@@ -11,11 +18,11 @@ const Login = () => {
 		<form className="authForm">
 
 	     <div className="input-field">
-	          <input id="email" type="email" />
+	          <input id="email" type="email" name="email" onChange={changeHandler} />
 	          <label>Почта</label>
 	      </div>
         <div className="input-field">
-          <input id="password" type="password" />
+          <input id="password" type="password" name="password" onChange={changeHandler} />
           <label>Пароль</label>
         </div>
 
@@ -26,15 +33,15 @@ const Login = () => {
 	const registrationForm = (
 		<form className="authForm">
 			<div className="input-field">
-	          <input id="text" type="text" />
+	          <input id="text" type="text" name="name" onChange={changeHandler}/>
 	          <label>Имя</label>
 	      </div>
 	     <div className="input-field">
-	          <input id="email" type="email" />
+	          <input id="email" type="email" name="email" onChange={changeHandler}/>
 	          <label>Почта</label>
 	      </div>
         <div className="input-field">
-          <input id="password" type="password" />
+          <input id="password" type="password" name="password" onChange={changeHandler}/>
           <label>Пароль</label>
         </div>
 		<div className="waves-effect waves-light btn">Зарегистрироваться</div>

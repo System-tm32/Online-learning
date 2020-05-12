@@ -8,8 +8,14 @@ export const useRoutes = isAuthenticated => {
 	if(isAuthenticated) {
 		return (
 		<Switch>
+			<Route path='/' exact>
+				<Auth />
+			</Route>
 			<Route path='/profile/:id'>
 
+			</Route>
+			<Route path='/course' exact>
+				
 			</Route>
 			<Redirect to="/" />
 		</Switch>
