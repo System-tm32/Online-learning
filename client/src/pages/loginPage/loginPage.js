@@ -5,7 +5,6 @@ const Login = () => {
 	const [isRegistration, setIsRegistration] = useState(false);
 
 	const statusFormHandler = (isStatus) => {
-		console.log(!isStatus);
 		setIsRegistration(!isStatus);
 	}
 	const authForm = (

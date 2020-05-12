@@ -3,6 +3,7 @@ import {BrowserRouter} from 'react-router-dom'
 import {useRoutes} from './routes'
 import NavBar from './components/navBar/navBar';
 import Footer from './components/footer/footer';
+import {connect} from 'react-redux'
 import './App.css';
 import 'materialize-css'
 
