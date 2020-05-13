@@ -1,18 +1,25 @@
 import React, {useState} from 'react'
+import { connect } from 'react-redux'
+import { auth } from '../../store/actions/authAction'
 import './loginPage.css'
 
-const Login = () => {
+const Login = (props) => {
 	const [isRegistration, setIsRegistration] = useState(false);
 	const [form, setForm] = useState({
 		email: '', password: '', name: ''
 	});
-
 	const changeHandler = event => {
 		setForm({...form, [event.target.name]: event.target.value})
 	}
 
 	const statusFormHandler = (isStatus) => {
 		setIsRegistration(!isStatus);
+	}
+	const loginHandler = () => {
+		
+	}
+	const registerHandler = () => {
+		props.auth({...form}, false)
 	}
 	const authForm = (
 		<form className="authForm">
@@ -44,7 +51,7 @@ const Login = () => {
           <input id="password" type="password" name="password" onChange={changeHandler}/>
           <label>Пароль</label>
         </div>
-		<div className="waves-effect waves-light btn">Зарегистрироваться</div>
+		<div className="waves-effect waves-light btn" onClick={registerHandler}>Зарегистрироваться</div>
 		<div className="waves-effect waves-light btn grey lighten-2" onClick={() => statusFormHandler(isRegistration)}>Назад</div>
 	</form>
 	)
@@ -54,12 +61,16 @@ const Login = () => {
 				<div className="col s12">
 				{!isRegistration ? authForm :
 					registrationForm
-
 				}
 				</div>
 			</div>
 		</div>
 	)
 }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+	}
+}
 
-export default Login;
+export default connect(null,mapDispatchToProps)(Login);

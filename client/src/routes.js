@@ -2,7 +2,7 @@ import React from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import Auth from './pages/authPage/authPage'
 import LoginPage from './pages/loginPage/loginPage'
-
+import CoursePage from './pages/coursePage/coursePage'
 
 export const useRoutes = isAuthenticated => {
 	if(isAuthenticated) {
@@ -14,8 +14,8 @@ export const useRoutes = isAuthenticated => {
 			<Route path='/profile/:id'>
 
 			</Route>
-			<Route path='/course' exact>
-				
+			<Route path='/courses'>
+				<CoursePage />
 			</Route>
 			<Redirect to="/" />
 		</Switch>
@@ -28,6 +28,9 @@ export const useRoutes = isAuthenticated => {
 				<Auth />
 			</Route>
 			<Route path="/login" exact>
+				<LoginPage />
+			</Route>
+			<Route path='/courses'>
 				<LoginPage />
 			</Route>
 			<Redirect to="/" />

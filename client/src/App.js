@@ -12,8 +12,7 @@ function App(props) {
     useEffect(() => {
       props.authSuccess();
     });
-    console.log(props.isAuthenticated)
-  const routes = useRoutes(true)
+  const routes = useRoutes(props.isAuthenticated)
   return (
     <React.Fragment>
     <NavBar />
