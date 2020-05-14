@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import Auth from './pages/authPage/authPage'
 import LoginPage from './pages/loginPage/loginPage'
 import CoursePage from './pages/coursePage/coursePage'
+import PrivatePage from './pages/privatePage/privatePage'
 
 export const useRoutes = isAuthenticated => {
 	if(isAuthenticated) {
@@ -11,9 +12,7 @@ export const useRoutes = isAuthenticated => {
 			<Route path='/' exact>
 				<Auth />
 			</Route>
-			<Route path='/profile/:id'>
-
-			</Route>
+			<Route path='/profile/:id' component={PrivatePage} />
 			<Route path='/courses'>
 				<CoursePage />
 			</Route>
