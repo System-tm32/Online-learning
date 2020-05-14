@@ -9,7 +9,7 @@ import './App.css';
 import 'materialize-css'
 
 function App(props) {
-  const routes = useRoutes(props.isAuthenticated);
+  const routes = useRoutes(props.isAuthenticated, props.userId);
   useEffect(()=> {
 
     props.autoLogin()

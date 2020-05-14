@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const authRoute = require('./routes/auth.routes');
-
+const courseRoute = require('./routes/course.routes');
 const app = express();
 
 app.use(express.json({ extended: true}));
@@ -11,7 +11,7 @@ const PORT = config.get('port') || 5000;
 
 app.use('/api/auth',authRoute);
 
-
+app.use('/api/course', courseRoute);
 
 async function start() {
 	try {
