@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { auth } from '../../store/actions/authAction'
 import './loginPage.css'
+import {useMessage} from '../../hooks/message.hook'
 
 const Login = (props) => {
 	const [isRegistration, setIsRegistration] = useState(false);
+	const message = useMessage();
 	const [form, setForm] = useState({
 		email: '', password: '', name: ''
 	});
@@ -12,14 +14,19 @@ const Login = (props) => {
 		setForm({...form, [event.target.name]: event.target.value})
 	}
 
+	useEffect(()=>{
+		message(props.error);
+	}, [props.error, message])
 	const statusFormHandler = (isStatus) => {
 		setIsRegistration(!isStatus);
 	}
 	const loginHandler = () => {
-		
+		props.auth({...form}, true);
+
 	}
 	const registerHandler = () => {
-		props.auth({...form}, false)
+		props.auth({...form}, false);
+
 	}
 	const authForm = (
 		<form className="authForm">
@@ -33,7 +40,7 @@ const Login = (props) => {
           <label>Пароль</label>
         </div>
 
-		<div className="waves-effect waves-light btn">Войти</div>
+		<div className="waves-effect waves-light btn" onClick={loginHandler}>Войти</div>
 		<div className="waves-effect waves-light btn" onClick={() => statusFormHandler(isRegistration)}>Регистрация</div>
 	</form>
 	)
@@ -52,7 +59,7 @@ const Login = (props) => {
           <label>Пароль</label>
         </div>
 		<div className="waves-effect waves-light btn" onClick={registerHandler}>Зарегистрироваться</div>
-		<div className="waves-effect waves-light btn grey lighten-2" onClick={() => statusFormHandler(isRegistration)}>Назад</div>
+		<div className="waves-effect waves-light btn blue lighten-2" onClick={() => statusFormHandler(isRegistration)}>Назад</div>
 	</form>
 	)
 	return (
@@ -67,10 +74,16 @@ const Login = (props) => {
 		</div>
 	)
 }
+
+const mapStateToProps = (state) => {
+	return {
+		error: state.auth.error
+	}
+}
 const mapDispatchToProps = (dispatch) => {
 	return {
 		auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
 	}
 }
 
-export default connect(null,mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

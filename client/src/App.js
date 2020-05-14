@@ -4,18 +4,25 @@ import {useRoutes} from './routes'
 import NavBar from './components/navBar/navBar';
 import Footer from './components/footer/footer';
 import {connect} from 'react-redux'
-import {authSuccess} from './store/actions/authAction'
+import {authSuccess, autoLogin, logout} from './store/actions/authAction'
 import './App.css';
 import 'materialize-css'
 
 function App(props) {
-    useEffect(() => {
-      props.authSuccess();
-    });
-  const routes = useRoutes(props.isAuthenticated)
+  const routes = useRoutes(props.isAuthenticated);
+  useEffect(()=> {
+
+    props.autoLogin()
+  }
+  )
   return (
     <React.Fragment>
-    <NavBar />
+    <NavBar 
+      isAuthenticated={props.isAuthenticated}
+      userName={props.userName}
+      userId={props.userId}
+      logout={props.logout}
+    />
       <div className="container-fluid">
         {routes}
       </div>
@@ -25,13 +32,17 @@ function App(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: !!state.auth.token
+    isAuthenticated: !!state.auth.token,
+    userName: state.auth.name,
+    userId: state.auth.userId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    authSuccess: (token) => dispatch(authSuccess(token))
+    authSuccess: (token) => dispatch(authSuccess(token)),
+    autoLogin: () => dispatch(autoLogin()),
+    logout: () => dispatch(logout())
   }
 }
 

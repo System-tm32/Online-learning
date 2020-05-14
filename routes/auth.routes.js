@@ -50,10 +50,10 @@ router.post(
 	async (req, res) => {
 	try {
 		const errors = validationResult(req);
-		if (errors.isEmpty()) {
+		if (!errors.isEmpty()) {
 			return res.status(400).json({
 				errors: errors.array(),
-				message: 'Некорректные данные при регистрации'
+				message: 'Некорректные данные при входе'
 			})
 		}
 
@@ -77,7 +77,7 @@ router.post(
 			{ expiresIn: '1h' }
 		);
 
-		res.json({ token, userId: user.id});
+		res.json({ token, userId: user.id, name: user.name});
 		
 
 	} catch (e) {

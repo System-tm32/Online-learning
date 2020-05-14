@@ -8,20 +8,33 @@ export const auth = (form, isLogin) => {
 			const headers = {
 				'Content-Type': 'application/json'
 			}
-			const response = await fetch('/api/auth/register', {
+			let url = '/api/auth/register'
+			if (isLogin) {
+				url = '/api/auth/login'
+			} 
+			const response = await fetch(url, {
 				method: 'POST', body, headers
 			})
-			console.log(form);
 			const data = await response.json();
-			console.log(data);
-
 			if(!response.ok) {
 				
 			}
-			console.log(data);
-			return data
+			if (!isLogin) {
+				dispatch(authRequest(data.message));
+			}
+			dispatch(authSuccess(data.token, data.userId, data.name))
+
 		} catch (e){
 			throw e
+		}
+	}
+}
+
+export const authRequest = (error) => {
+	return {
+		type: 'AUTH_REQUEST',
+		payload: {
+			error
 		}
 	}
 }
@@ -32,11 +45,26 @@ export const logout = () => {
 	}
 }
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, userId, name) => {
 	return {
 		type: 'AUTH_SUCCESS',
 		payload: {
-			token
+			token, userId, name
+		}
+	}
+}
+
+export const autoLogin = () => {
+	return dispatch => {
+		const data = JSON.parse(localStorage.getItem('userData'))
+		if (data === null) {
+			return
+		}
+		//console.log(data.token)
+		if (!data.token) {
+			dispatch(logout())
+		} else {
+			dispatch(authSuccess(data.token, data.userId, data.name));
 		}
 	}
 }
