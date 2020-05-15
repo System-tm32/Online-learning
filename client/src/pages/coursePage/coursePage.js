@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react'
 import './coursePage.css'
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {getCourseList} from '../../store/actions/courseAction'
 
 const CoursePage = (props) => {
+	const {getCourseList} = props;
 	useEffect(() =>{
-		props.getCourseList();
-	}, props.course);
-	console.log(Object.keys(props.course))
+		getCourseList();
+	}, [getCourseList]);
 	return (
 		<div className="container course_block">
 			<div className="row">

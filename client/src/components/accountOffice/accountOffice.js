@@ -11,9 +11,9 @@ export const AccountOffice = (props) => {
 						<div className="col l4">
 		      <div className="card">
 		        <div className="card-image">
-		          <img src="https://www.1zoom.ru/big2/60/175546-Sepik.jpg" />
+		          <img src="https://www.1zoom.ru/big2/60/175546-Sepik.jpg" alt="img"/>
 		          <span className="card-title">{props.name}</span>
-		          <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
+		          <div className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></div>
 		        </div>
 		        <div className="card-content">
 		          <p>Описание нужно добавить с сервера.</p>
@@ -26,7 +26,7 @@ export const AccountOffice = (props) => {
 				  			<h2 className="header">Как написать диплом за 24 часа с нуля?</h2>
 							    <div className="card horizontal">
 							      <div className="card-image">
-							        <img src="https://avatars.mds.yandex.net/get-pdb/1338671/f7ee2cd5-4f9e-4187-9a62-551bc499425f/s1200?webp=false" />
+							        <img src="https://avatars.mds.yandex.net/get-pdb/1338671/f7ee2cd5-4f9e-4187-9a62-551bc499425f/s1200?webp=false" alt="img" />
 							      </div>
 							      <div className="card-stacked">
 							        <div className="card-content">
@@ -42,7 +42,7 @@ export const AccountOffice = (props) => {
 				  			<h2 className="header">Как написать диплом за 12 часа с нуля?</h2>
 							    <div className="card horizontal">
 							      <div className="card-image">
-							        <img src="https://avatars.mds.yandex.net/get-pdb/1338671/f7ee2cd5-4f9e-4187-9a62-551bc499425f/s1200?webp=false" />
+							        <img src="https://avatars.mds.yandex.net/get-pdb/1338671/f7ee2cd5-4f9e-4187-9a62-551bc499425f/s1200?webp=false"  alt="img"/>
 							      </div>
 							      <div className="card-stacked">
 							        <div className="card-content">

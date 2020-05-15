@@ -1,3 +1,6 @@
 .course_block {
 	padding: 50px 0;
 }
+.createCourse_form select {
+	display: block
+}
