@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import './coursePage.css'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getCourseList} from '../../store/actions/courseAction'
 
 const CoursePage = (props) => {
@@ -14,11 +15,11 @@ const CoursePage = (props) => {
 				<div className="col s6">
 					  <div className="card medium">
 					    <div className="card-image waves-effect waves-block waves-light">
-					      <img className="activator" src="office.jpg" alt="diplom"/>
+					      <img className="activator" src={props.urlImage} alt="diplom"/>
 					    </div>
 					    <div className="card-content">
 					      <span className="card-title activator grey-text text-darken-4">{props.title}<i className="material-icons right">more_vert</i></span>
-					      <p>Приступить</p>
+					      <Link to={`/course/${props.id}`}>Приступить</Link>
 					    </div>
 					    <div className="card-reveal">
 					      <span className="card-title grey-text text-darken-4">ДИПЛОМ ЗА 24 ЧАСА РЕАЛЬНО<i className="material-icons right">close</i></span>
@@ -49,11 +50,13 @@ const CoursePage = (props) => {
 const mapStateToProps = (state) => {
 
 	return {
+		id: state.course.id,
 		title: state.course.title,
 		description: state.course.description,
 		text: state.course.text,
 		homeWork: state.course.homeWork,
-		course: state.course
+		course: state.course,
+		urlImage: state.course.urlImage
 
 	}
 }

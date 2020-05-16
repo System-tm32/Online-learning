@@ -5,6 +5,7 @@ import LoginPage from './pages/loginPage/loginPage'
 import CoursePage from './pages/coursePage/coursePage'
 import PrivatePage from './pages/privatePage/privatePage'
 import createCoursePage from './pages/coursePage/createCoursePage'
+import CourseSinglePage from './pages/coursePage/courseSinglePage'
 
 export const useRoutes = (isAuthenticated, id) => {
 	if(isAuthenticated) {
@@ -15,6 +16,7 @@ export const useRoutes = (isAuthenticated, id) => {
 			</Route>
 			{id === '5ebd4aec27673c1f14a1bfba' ? <Route path='/create-course' component={createCoursePage} /> : null}
 			<Route path='/profile/:id' component={PrivatePage} />
+			<Route path='/course/:id' component={CourseSinglePage} />
 			<Route path='/courses'>
 				<CoursePage />
 			</Route>
