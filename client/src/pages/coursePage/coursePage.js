@@ -12,36 +12,26 @@ const CoursePage = (props) => {
 	return (
 		<div className="container course_block">
 			<div className="row">
-				<div className="col s6">
+				{props.courses.map(course => {
+					return(
+					<div className="col s6" key={course._id}>
 					  <div className="card medium">
 					    <div className="card-image waves-effect waves-block waves-light">
-					      <img className="activator" src={props.urlImage} alt="diplom"/>
+					      <img className="activator" src={course.urlImage} alt="diplom"/>
 					    </div>
 					    <div className="card-content">
-					      <span className="card-title activator grey-text text-darken-4">{props.title}<i className="material-icons right">more_vert</i></span>
-					      <Link to={`/course/${props.id}`}>Приступить</Link>
+					      <span className="card-title activator grey-text text-darken-4">{course.title}<i className="material-icons right">more_vert</i></span>
+					      <Link to={`/course/singleCourse/${course._id}`}>Приступить</Link>
 					    </div>
 					    <div className="card-reveal">
-					      <span className="card-title grey-text text-darken-4">ДИПЛОМ ЗА 24 ЧАСА РЕАЛЬНО<i className="material-icons right">close</i></span>
-					      <p>{props.description}</p>
+					      <span className="card-title grey-text text-darken-4">Курс - {course.title}<i className="material-icons right">close</i></span>
+					      <p>{course.description}</p>
 					    </div>
 					  </div>
 				</div>
-				<div className="col s6">
-					  <div className="card medium">
-					    <div className="card-image waves-effect waves-block waves-light">
-					      <img className="activator" src="office.jpg" alt="diplom" />
-					    </div>
-					    <div className="card-content">
-					      <span className="card-title activator grey-text text-darken-4">Диплом за 12часа<i className="material-icons right">more_vert</i></span>
-					      <p><a href="/">Приступить</a></p>
-					    </div>
-					    <div className="card-reveal">
-					      <span className="card-title grey-text text-darken-4">ДИПЛОМ ЗА 12 ЧАСА РЕАЛЬНО<i className="material-icons right">close</i></span>
-					      <p>У тебя осталось 12 часа до диплома, а готов только титульник! Не проблема, с нашим курсом ты напишешь диплом всего за 10 часов на любую тему на оценку не ниже 4. Оформляй подписку всегоз за 11.99$ в час и не пожалеешь!</p>
-					    </div>
-					  </div>
-				</div>
+					)
+				})}
+
 			</div>
 		</div>
 	)
@@ -50,14 +40,7 @@ const CoursePage = (props) => {
 const mapStateToProps = (state) => {
 
 	return {
-		id: state.course.id,
-		title: state.course.title,
-		description: state.course.description,
-		text: state.course.text,
-		homeWork: state.course.homeWork,
-		course: state.course,
-		urlImage: state.course.urlImage
-
+		courses: state.course
 	}
 }
 const mapDispatchToProps = (dispatch) => {

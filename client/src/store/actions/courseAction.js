@@ -21,3 +21,20 @@ export const getCourse = (course) => {
 		payload: course
 	}
 }
+
+export const getSingleCourse = (id) => {
+	return async dispatch => {
+		try {
+			const url = `/api/course/singleCourse/${id}`;
+			const response = await axios({
+				method: 'get',
+				url: url
+			});
+			const data = await response.data;
+			dispatch(getCourse(data));
+
+		} catch(e) {
+			console.log(e)
+		}
+	}
+}

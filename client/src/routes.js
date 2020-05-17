@@ -16,8 +16,8 @@ export const useRoutes = (isAuthenticated, id) => {
 			</Route>
 			{id === '5ebd4aec27673c1f14a1bfba' ? <Route path='/create-course' component={createCoursePage} /> : null}
 			<Route path='/profile/:id' component={PrivatePage} />
-			<Route path='/course/:id' component={CourseSinglePage} />
-			<Route path='/courses'>
+			<Route path='/course/singleCourse/:id' component={CourseSinglePage} />
+			<Route path='/courses' exact>
 				<CoursePage />
 			</Route>
 			<Redirect to="/" />

@@ -1,19 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {getSingleCourse} from '../../store/actions/courseAction'
 
 const CourseSinglePage = (props) => {
 	// 0 - view | 1 - text | 2 - test | 3 - homeWork
+	const {getSingleCourse} = props;
+	const paramId = props.match.params.id;
+	useEffect(()=>{
+		getSingleCourse(paramId)
+	},[paramId]);
+
 	const [condition, setCondition] = useState(0);
 	const conditionHandler = (count) => {
 		setCondition(count);
 	}
+
+	let {text, title, urlImage, homeWork, description} = props.course[0];
+	let quiz = {}
+	if (props.course[0].quizes !== undefined) {
+		console.log(JSON.parse(props.course[0].quizes))
+		quiz = JSON.parse(props.course[0].quizes);
+	}
+	console.log(Object.keys(quiz))
 	let courseBlock = (
 		<div className="course_wrapper">
-			<h2>Курс: {props.title}</h2>
-			<img src={props.urlImage} className="course_img"/>
+			<h2>Курс: {title}</h2>
+			<img src={urlImage} className="course_img"/>
 			<p>
-				{props.description}
+				{description}
 			</p>
 		</div>
 	)
@@ -22,7 +37,7 @@ const CourseSinglePage = (props) => {
 		<div className="course_wrapper">
 			<h2>Теория</h2>
 			<p>
-				{props.text}
+				{text}
 			</p>
 		</div>
 		)
@@ -30,16 +45,22 @@ const CourseSinglePage = (props) => {
 		courseBlock = (
 		<div className="course_wrapper">
 			<h2>Тест</h2>
-			<p>
-				{props.quizes.question}
-			</p>
-			<ul>
-				<ol>1. {props.quizes.quiz1['1']}</ol>
-				<ol>2. {props.quizes.quiz1['2']}</ol>
-				<ol>3. {props.quizes.quiz1['3']}</ol>
-				<ol>4. {props.quizes.quiz1['4']}</ol>
-				<ol>Правильный ответ. {props.quizes.quiz1.correctAnswer}</ol>
-			</ul>
+
+			{Object.keys(quiz).map(quizName => {
+				console.log('quizName');
+				console.log(quiz[quizName]);
+				const singleQuiz = quiz[quizName];
+				return Object.keys(singleQuiz).map(quizTitle => {
+					return (
+						<React.Fragment key={quizTitle}>
+						<ul>
+							{singleQuiz[quizTitle]}
+						</ul>
+						</React.Fragment>
+					)
+				})
+			})}
+
 		</div>
 		)
 	} else if (condition === 3){
@@ -47,7 +68,7 @@ const CourseSinglePage = (props) => {
 		<div className="course_wrapper">
 			<h2>Домашнее задание</h2>
 			<p>
-				{props.homeWork}
+				{homeWork}
 			</p>
 		</div>
 		)
@@ -89,19 +110,12 @@ const CourseSinglePage = (props) => {
 const mapStateToProps = (state) => {
 
 	return {
-		id: state.course.id,
-		title: state.course.title,
-		description: state.course.description,
-		text: state.course.text,
-		homeWork: state.course.homeWork,
-		quizes: state.course.quizes,
-		urlImage: state.course.urlImage
-
+		course: state.course
 	}
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+		getSingleCourse: (id) => dispatch(getSingleCourse(id))
 	}
 }
 
