@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getSingleCourse} from '../../store/actions/courseAction'
+import ActiveQuiz from '../../components/activeQuiz/activeQuiz'
+import FinishedQuiz from '../../components/finishedQuiz/finishedQuiz'
+import {getSingleCourse, quizAnswerClick, fetchQuizSuccess, retryQuiz} from '../../store/actions/courseAction'
 
 const CourseSinglePage = (props) => {
 	// 0 - view | 1 - text | 2 - test | 3 - homeWork
-	const {getSingleCourse} = props;
+	const {getSingleCourse, fetchQuizSuccess} = props;
 	const paramId = props.match.params.id;
+	let {text, title, urlImage, homeWork, description} = props.course[0];
+	let quiz = {}
+	if (props.course[0].quizes !== undefined) {
+		console.log(JSON.parse(props.course[0].quizes))
+		quiz = JSON.parse(props.course[0].quizes);
+	}
 	useEffect(()=>{
-		getSingleCourse(paramId)
+		getSingleCourse(paramId);
 	},[paramId]);
 
 	const [condition, setCondition] = useState(0);
@@ -16,13 +24,6 @@ const CourseSinglePage = (props) => {
 		setCondition(count);
 	}
 
-	let {text, title, urlImage, homeWork, description} = props.course[0];
-	let quiz = {}
-	if (props.course[0].quizes !== undefined) {
-		console.log(JSON.parse(props.course[0].quizes))
-		quiz = JSON.parse(props.course[0].quizes);
-	}
-	console.log(Object.keys(quiz))
 	let courseBlock = (
 		<div className="course_wrapper">
 			<h2>Курс: {title}</h2>
@@ -45,21 +46,29 @@ const CourseSinglePage = (props) => {
 		courseBlock = (
 		<div className="course_wrapper">
 			<h2>Тест</h2>
+			<div className="quiz">
 
-			{Object.keys(quiz).map(quizName => {
-				console.log('quizName');
-				console.log(quiz[quizName]);
-				const singleQuiz = quiz[quizName];
-				return Object.keys(singleQuiz).map(quizTitle => {
-					return (
-						<React.Fragment key={quizTitle}>
-						<ul>
-							{singleQuiz[quizTitle]}
-						</ul>
-						</React.Fragment>
-					)
-				})
-			})}
+			<div className="quiz-wrapper">
+				{
+					props.isFinished ?
+					<FinishedQuiz 
+						results={props.results}
+						quiz={props.quiz}
+						onRetry={props.retryQuiz}
+					/>
+					:
+					<ActiveQuiz 
+					answers={props.quiz[props.activeQuestion].answers}
+					question={props.quiz[props.activeQuestion].question}
+					onAnswerClick={props.quizAnswerClick}
+					quizLength={props.quiz.length}
+					answerNumber={props.activeQuestion + 1}
+					state={props.answerState}
+					/>
+				}
+			</div>
+		</div>
+			
 
 		</div>
 		)
@@ -80,7 +89,7 @@ const CourseSinglePage = (props) => {
 				Вы прекрасны!
 			</p>
 			<div className="col l6">
-				<Link to={'/courses'} className="waves-effect waves-light btn">Обратно к курсам</Link>
+				<Link to={'/courses'} className="waves-effect waves-light btn" onClick={() => props.retryQuiz()}>Обратно к курсам</Link>
 			</div>
 		</div>
 		)
@@ -110,12 +119,21 @@ const CourseSinglePage = (props) => {
 const mapStateToProps = (state) => {
 
 	return {
-		course: state.course
+		course: state.course,
+		results: state.quiz.results,
+		isFinished: state.quiz.isFinished,
+		activeQuestion: state.quiz.activeQuestion,
+		answerState: state.quiz.answerState,
+		quiz: state.quiz.quiz,
+		loading: state.quiz.loading
 	}
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getSingleCourse: (id) => dispatch(getSingleCourse(id))
+		retryQuiz: () => dispatch(retryQuiz()),
+		fetchQuizSuccess: item => dispatch(fetchQuizSuccess(item)),
+		getSingleCourse: (id) => dispatch(getSingleCourse(id)),
+		quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
 	}
 }
 

@@ -4,21 +4,11 @@ const config = require('config');
 const router = Router();
 
 router.post('/create-course', async (req, res) => {
-
-	const {title, description, text, question, answer1, answer2, answer3, answer4, correctAnswer, homeWork, urlImage} = req.body;
-	console.log(title,description,text);
-	const quizes = {
-		quiz1: {
-			question: question,
-			1: answer1,
-			2: answer2,
-			3: answer3,
-			4: answer4,
-			correctAnswer: correctAnswer
-		}
-	}
+	const {body, quizes} = req.body;
+	const {title, description, text, homeWork, urlImage} = body;
 	const course = new Course({title, description, text, quizes: JSON.stringify(quizes), homeWork, urlImage});
 	course.save();
+	res.json({message: 'Курс создан успешно'})
 })
 
 router.get('/course-list', async(req, res) => {

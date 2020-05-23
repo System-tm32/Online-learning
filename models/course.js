@@ -6,7 +6,11 @@ const schema = new Schema({
 	text: {type: String, required: true},
 	urlImage: {type: String, required: true},
 	quizes: {type: String},
-	homeWork: String
+	homeWork: String,
+	learner: [{type: Types.ObjectId, ref: 'User'}]
 });
 
 module.exports = model('Course', schema);
+
+
+
