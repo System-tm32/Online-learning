@@ -10,11 +10,11 @@ import 'materialize-css'
 
 function App(props) {
   const routes = useRoutes(props.isAuthenticated, props.userId);
+  const {autoLogin} = props;
   useEffect(()=> {
 
-    props.autoLogin()
-  }
-  )
+    autoLogin()
+  }, [autoLogin])
   return (
     <React.Fragment>
     <NavBar 

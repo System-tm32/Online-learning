@@ -9,8 +9,8 @@ const NavBar = (props) => {
 	}
 	return (
 		  <nav>
-		    <div className="nav-wrapper orange lighten-3">
-		      <a href="/" className="brand-logo">Саня Станина</a>
+		    <div className="nav-wrapper grey lighten-5">
+		      <a href="/" className="brand-logo">Skinavo</a>
 		      <ul className="right hide-on-med-and-down">
 		        { !props.isAuthenticated
 		        	? 

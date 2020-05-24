@@ -9,10 +9,11 @@ const authReducer = (state = initialState, action) => {
 			localStorage.setItem('userData', JSON.stringify({
 				userId: action.payload.userId,
 				token: action.payload.token,
-				name: action.payload.name
+				name: action.payload.name,
+				expDate: action.payload.expDate
 			}))
 			return {
-				...state, token: action.payload.token, userId: action.payload.userId, name: action.payload.name
+				...state, token: action.payload.token, userId: action.payload.userId, name: action.payload.name, expDate: action.payload.expDate
 			}
 		case 'AUTH_LOGOUT':
 			localStorage.removeItem('userData')
