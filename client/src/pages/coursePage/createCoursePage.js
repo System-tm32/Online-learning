@@ -4,7 +4,7 @@ import {createQuizQuestion, finishCreateCourse} from '../../store/actions/create
 import Input from '../../components/ui/input/input'
 import Select from '../../components/ui/select/select'
 import Button from '../../components/ui/button/button'
-
+import JoditEditor from "jodit-react";
 import './coursePage.css'
 
 function validate(value, validation = null) {
@@ -63,12 +63,17 @@ function createFormControls() {
 }
 
 class CreateCoursePage extends React.Component {
-
+	constructor(props) {
+		super(props);
+		this.editor = React.createRef(null);
+	}
 	state = {
 		isFormValid: false,
 		rightAnswerId: 1,
 		formControls: createFormControls(),
-		body: {}
+		body: {
+			text: ''
+		}
 	}
 
 	addQuestionHandler = (e) => {
@@ -158,6 +163,14 @@ class CreateCoursePage extends React.Component {
 			}
 		})
 	}
+	editorHandler = (newContent) => {
+		console.log(newContent)
+		this.setState({
+			body: {
+			...this.state.body, text: newContent
+			}
+		})
+	}
 
 
 	render() {
@@ -196,9 +209,13 @@ class CreateCoursePage extends React.Component {
 			          </div>
 			          <h3>Теория</h3>
 			          <div className="input-field">
-				          <textarea id="course_theory" className="materialize-textarea" name="text" onChange={this.inputChangeHandler}/>
-				          <label htmlFor="course_theory">Текст теории</label>
-			          </div>
+		                      <JoditEditor
+				            	ref={this.editor}
+						        value={this.state.body.text}
+								tabIndex={1} 
+								onBlur={this.editorHandler} 
+						       />
+	         		 </div>
 			          <div className="test_wrapper">
 									
 								<h1>Создание теста</h1>

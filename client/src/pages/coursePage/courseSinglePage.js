@@ -36,9 +36,7 @@ const CourseSinglePage = (props) => {
 		courseBlock = (
 		<div className="course_wrapper">
 			<h2>Теория</h2>
-			<p>
-				{text}
-			</p>
+			<div dangerouslySetInnerHTML={{__html: text}}></div>
 		</div>
 		)
 	} else if (condition === 2) {
