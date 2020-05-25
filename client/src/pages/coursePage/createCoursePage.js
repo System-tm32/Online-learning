@@ -4,6 +4,7 @@ import {createQuizQuestion, finishCreateCourse} from '../../store/actions/create
 import Input from '../../components/ui/input/input'
 import Select from '../../components/ui/select/select'
 import Button from '../../components/ui/button/button'
+
 import './coursePage.css'
 
 function validate(value, validation = null) {
@@ -172,7 +173,7 @@ class CreateCoursePage extends React.Component {
 			]}
 		/>
 		return (
-		<div className="container">
+		<div className="container create_course_wrapper">
 			<div className="row">
 				<div className="col l12">
 					<h2>Создай курс по шагам</h2>
@@ -187,7 +188,7 @@ class CreateCoursePage extends React.Component {
 			          </div>
 			           <div className="input-field">
 				          <input id="urlImage" type="text"  name="urlImage" onChange={this.inputChangeHandler}/>
-				          <label htmlFor="urlImage">Изображение</label>
+				          <label htmlFor="urlImage">Изображение (url)</label>
 			          </div>
 			          <div className="input-field">
 				          <textarea id="course_description" className="materialize-textarea" name="description" onChange={this.inputChangeHandler}/>

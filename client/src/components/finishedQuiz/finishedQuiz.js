@@ -13,13 +13,15 @@ const FinishedQuiz = (props) => {
 			<ul>
 				{ Object.keys(props.quiz).map( (quizItem, index) => {
 					const cls = [
-						props.results[quizItem.id] === 'error' ? 'error' : 'success'
+						props.results[quizItem] === 'error' ? 'error' : 'success',
+						'material-icons'
 					];
+					console.log(cls);
 					return (
 						<li key={index}>
 							<strong>{index + 1}. </strong>
 							{props.quiz[quizItem].question}
-							<span className={cls.join(' ')}>#</span>
+							<span className={cls.join(' ')}>check</span>
 						</li>
 					)
 				}) }

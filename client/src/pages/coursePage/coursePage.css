@@ -1,21 +1,54 @@
 .course_block {
-	padding: 50px 0;
+	min-height: 100vh;
+	padding-top: 50px;
 }
 .createCourse_form select {
 	display: block
 }
 .course_wrapper {
-	box-shadow: 0px 2px 5px 0px gray;
+	box-shadow: 0px 50px 80px 0px rgba(15,19,25,0.1);
 	padding: 50px;
 	line-height: 1.1;
 	margin-bottom: 50px;
-	margin-top: 50px;
 	font-size: 24px;
 }
 .course_img {
 	width: 100%;
 }
 .test_wrapper {
-	box-shadow: 1px 2px 10px 0px gray;
 	padding: 5px;
+}
+.course_block .card{
+	box-shadow: 0px 50px 80px 0px rgba(15,19,25,0.1);
+}
+.course_block .card .card-title {
+	font-size: 18px;
+	line-height: 1.1;
+}
+.course_block .button_wrapper {
+	text-align: right;
+	width: 100%;
+	padding: 10px 0;
+}
+.course_navigation-control {
+	width: 220px;
+	position: fixed;
+	right: 0;
+	height: 20vh;
+	border: 2px solid #d7d7d7;
+	bottom: 0;
+	z-index: 100;
+	background: #fafafa;
+	padding: 25px 15px;
+	text-align: center;
+}
+.course_navigation-control .label{
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	display: block;
+}
+.create_course_wrapper {
+	box-shadow: 0px 50px 80px 0px rgba(15,19,25,0.1);
+	padding: 15px 30px
 }

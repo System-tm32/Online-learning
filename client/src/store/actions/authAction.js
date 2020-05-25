@@ -64,7 +64,6 @@ export const autoLogout = (time) => {
 export const autoLogin = () => {
 	return dispatch => {
 		const data = JSON.parse(localStorage.getItem('userData'))
-		console.log(data)
 		if (!data) {
 			console.log('ya tyt')
 			dispatch(logout())

@@ -12,7 +12,6 @@ const CourseSinglePage = (props) => {
 	let {text, title, urlImage, homeWork, description} = props.course[0];
 	let quiz = {}
 	if (props.course[0].quizes !== undefined) {
-		console.log(JSON.parse(props.course[0].quizes))
 		quiz = JSON.parse(props.course[0].quizes);
 	}
 	useEffect(()=>{
@@ -26,7 +25,7 @@ const CourseSinglePage = (props) => {
 
 	let courseBlock = (
 		<div className="course_wrapper">
-			<h2>Курс: {title}</h2>
+			<h3>Курс: {title}</h3>
 			<img src={urlImage} className="course_img"/>
 			<p>
 				{description}
@@ -47,7 +46,6 @@ const CourseSinglePage = (props) => {
 		<div className="course_wrapper">
 			<h2>Тест</h2>
 			<div className="quiz">
-
 			<div className="quiz-wrapper">
 				{
 					props.isFinished ?
@@ -61,7 +59,7 @@ const CourseSinglePage = (props) => {
 					answers={props.quiz[props.activeQuestion].answers}
 					question={props.quiz[props.activeQuestion].question}
 					onAnswerClick={props.quizAnswerClick}
-					quizLength={props.quiz.length}
+					quizLength={Object.keys(props.quiz).length}
 					answerNumber={props.activeQuestion + 1}
 					state={props.answerState}
 					/>
@@ -83,7 +81,7 @@ const CourseSinglePage = (props) => {
 		)
 	} else if(condition === 4){
 	courseBlock = (
-		<div className="course_wrapper">
+		<div className="course_wrapper finish">
 			<h2>Курс пройден</h2>
 			<p>
 				Вы прекрасны!
@@ -95,13 +93,9 @@ const CourseSinglePage = (props) => {
 		)
 	}
 	return (
-		<div className="container">
-			<div className="row">
-				<div className="col l12">
-					{courseBlock}
-				</div>
-			</div>
-			<div className="row">
+		<React.Fragment>
+		<div className="course_navigation-control">
+			<span className="label">Навигация</span>
 			{condition !== 4 ? 	
 				<div className="col l6">
 					<div className="waves-effect waves-light btn" onClick={() => conditionHandler(condition + 1)}>Далее</div>
@@ -111,8 +105,15 @@ const CourseSinglePage = (props) => {
 					<div className="waves-effect waves-light btn" onClick={() => conditionHandler(condition - 1)}>Назад</div>
 				</div> : null}
 			</div>
+		<div className="container course_block">
+			<div className="row">
+				<div className="col l11">
+					{courseBlock}
+				</div>
+			</div>
 			
 		</div>
+		</React.Fragment>
 	)
 }
 

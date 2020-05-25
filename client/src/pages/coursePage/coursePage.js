@@ -3,7 +3,6 @@ import './coursePage.css'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getCourseList} from '../../store/actions/courseAction'
-
 const CoursePage = (props) => {
 	const {getCourseList} = props;
 	useEffect(() =>{
@@ -14,14 +13,16 @@ const CoursePage = (props) => {
 			<div className="row">
 				{props.courses.map(course => {
 					return(
-					<div className="col s6" key={course._id}>
-					  <div className="card medium">
+					<div className="col s4" key={course._id}>
+					  <div className="card">
 					    <div className="card-image waves-effect waves-block waves-light">
 					      <img className="activator" src={course.urlImage} alt="diplom"/>
 					    </div>
 					    <div className="card-content">
 					      <span className="card-title activator grey-text text-darken-4">{course.title}<i className="material-icons right">more_vert</i></span>
-					      <Link to={`/course/singleCourse/${course._id}`}>Приступить</Link>
+					      <div className="button_wrapper">
+					      	<Link to={`/course/singleCourse/${course._id}`} className="button success">Начать</Link>
+					      </div>
 					    </div>
 					    <div className="card-reveal">
 					      <span className="card-title grey-text text-darken-4">Курс - {course.title}<i className="material-icons right">close</i></span>
