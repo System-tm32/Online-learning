@@ -1,32 +1,29 @@
-import React, {useEffect} from 'react';
-import {withRouter} from 'react-router-dom'
-import {useRoutes} from './routes'
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { useRoutes } from './routes';
 import NavBar from './components/navBar/navBar';
 import Footer from './components/footer/footer';
-import {connect} from 'react-redux'
-import {authSuccess, autoLogin, logout} from './store/actions/authAction'
+import { connect } from 'react-redux';
+import { authSuccess, autoLogin, logout } from './store/actions/authAction';
 import './App.css';
-import 'materialize-css'
+import 'materialize-css';
 
 function App(props) {
   const routes = useRoutes(props.isAuthenticated, props.userId);
-  const {autoLogin} = props;
-  useEffect(()=> {
-
-    autoLogin()
-  }, [autoLogin])
+  const { autoLogin } = props;
+  useEffect(() => {
+    autoLogin();
+  }, [autoLogin]);
   return (
     <React.Fragment>
-    <NavBar 
-      isAuthenticated={props.isAuthenticated}
-      userName={props.userName}
-      userId={props.userId}
-      logout={props.logout}
-    />
-      <div className="container-fluid">
-        {routes}
-      </div>
-    <Footer />
+      <NavBar
+        isAuthenticated={props.isAuthenticated}
+        userName={props.userName}
+        userId={props.userId}
+        logout={props.logout}
+      />
+      <div className="container-fluid">{routes}</div>
+      <Footer />
     </React.Fragment>
   );
 }
@@ -34,16 +31,16 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: !!state.auth.token,
     userName: state.auth.name,
-    userId: state.auth.userId
-  }
-}
+    userId: state.auth.userId,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     authSuccess: (token) => dispatch(authSuccess(token)),
     autoLogin: () => dispatch(autoLogin()),
-    logout: () => dispatch(logout())
-  }
-}
+    logout: () => dispatch(logout()),
+  };
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

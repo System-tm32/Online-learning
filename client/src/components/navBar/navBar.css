@@ -1,16 +1,16 @@
 nav .brand-logo {
-	padding: 0 20px;
-	color: rgba(23%, 16%, 18%, .8);
-	font-weight: bold;
+  padding: 0 20px;
+  color: rgba(23%, 16%, 18%, 0.8);
+  font-weight: bold;
 }
 nav ul a {
-	color: rgba(23%, 16%, 18%, .8);;
-	font-family: 'Poppins';
-	font-weight: bold;
+  color: rgba(23%, 16%, 18%, 0.8);
+  font-family: 'Poppins';
+  font-weight: bold;
 }
 nav ul a:hover {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 .nav-wrapper {
-	box-shadow: 5px 0px 20px 1px #e0e0e0
+  box-shadow: 5px 0px 20px 1px #e0e0e0;
 }
